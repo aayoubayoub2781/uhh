@@ -2,12 +2,20 @@ require("dotenv").config();
 const express = require("express");
 const { spawn } = require("child_process");
 const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+const path = require("path");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// Serve static files (for assets like CSS, JS)
+app.use(express.static("public"));
 
-app.get("/stream/:key/:m3u8", async (req, res) => {
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// Streaming endpoint
+app.get("/stream/:key/:m3u8", (req, res) => {
   const { key, m3u8 } = req.params;
 
   const decodedM3u8 = decodeURIComponent(m3u8);
@@ -21,7 +29,7 @@ app.get("/stream/:key/:m3u8", async (req, res) => {
     "-tune", "zerolatency",
     "-b:v", "2500k",
     "-bufsize", "3000k",
-    "-s", "1280x720",           // 720p
+    "-s", "1280x720", // Set video resolution to 720p
     "-c:a", "aac",
     "-b:a", "96k",
     "-ac", "2",
@@ -49,5 +57,5 @@ app.get("/stream/:key/:m3u8", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
