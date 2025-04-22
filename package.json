@@ -2,9 +2,9 @@
   "name": "stream-api",
   "version": "1.0.0",
   "description": "Stream M3U8 to Facebook Live via API - Made by Ayoub Dev",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "Ayoub Dev",
   "license": "MIT",
