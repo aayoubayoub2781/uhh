@@ -1,0 +1,17 @@
+{
+  "name": "stream-api",
+  "version": "1.0.0",
+  "description": "Stream M3U8 to Facebook Live via API - Made by Ayoub Dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Ayoub Dev",
+  "license": "MIT",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.4"
+  }
+}
